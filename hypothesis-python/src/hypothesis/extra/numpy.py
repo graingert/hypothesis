@@ -305,7 +305,7 @@ def arrays(
     *,
     elements: Optional[st.SearchStrategy[Any]] = None,
     fill: Optional[st.SearchStrategy[Any]] = None,
-    unique: bool = False
+    unique: bool = False,
 ) -> st.SearchStrategy[np.ndarray]:
     r"""Returns a strategy for generating :class:`numpy:numpy.ndarray`\ s.
 
@@ -677,7 +677,7 @@ def array_dtypes(
     *,
     min_size: int = 1,
     max_size: int = 5,
-    allow_subarrays: bool = False
+    allow_subarrays: bool = False,
 ) -> st.SearchStrategy[np.dtype]:
     """Return a strategy for generating array (compound) dtypes, with members
     drawn from the given subtype strategy."""
@@ -713,7 +713,7 @@ def nested_dtypes(
     subtype_strategy: st.SearchStrategy[np.dtype] = scalar_dtypes(),
     *,
     max_leaves: int = 10,
-    max_itemsize: Optional[int] = None
+    max_itemsize: Optional[int] = None,
 ) -> st.SearchStrategy[np.dtype]:
     """Return the most-general dtype strategy.
 
@@ -733,7 +733,10 @@ def nested_dtypes(
 @st.defines_strategy()
 @deprecated_posargs
 def valid_tuple_axes(
-    ndim: int, *, min_size: int = 0, max_size: Optional[int] = None,
+    ndim: int,
+    *,
+    min_size: int = 0,
+    max_size: Optional[int] = None,
 ) -> st.SearchStrategy[Shape]:
     """Return a strategy for generating permissible tuple-values for the
     ``axis`` argument for a numpy sequential function (e.g.
@@ -787,7 +790,7 @@ def broadcastable_shapes(
     min_dims: int = 0,
     max_dims: Optional[int] = None,
     min_side: int = 1,
-    max_side: Optional[int] = None
+    max_side: Optional[int] = None,
 ) -> st.SearchStrategy[Shape]:
     """Return a strategy for generating shapes that are broadcast-compatible
     with the provided shape.
@@ -1108,7 +1111,7 @@ def mutually_broadcastable_shapes(
     min_dims: int = 0,
     max_dims: Optional[int] = None,
     min_side: int = 1,
-    max_side: Optional[int] = None
+    max_side: Optional[int] = None,
 ) -> st.SearchStrategy[BroadcastableShapes]:
     """Return a strategy for generating a specified number of shapes, N, that are
     mutually-broadcastable with one another and with the provided "base-shape".
@@ -1332,7 +1335,7 @@ def basic_indices(
     min_dims: int = 0,
     max_dims: Optional[int] = None,
     allow_newaxis: bool = False,
-    allow_ellipsis: bool = True
+    allow_ellipsis: bool = True,
 ) -> st.SearchStrategy[BasicIndex]:
     """
     The ``basic_indices`` strategy generates `basic indexes
@@ -1396,7 +1399,7 @@ def integer_array_indices(
     shape: Shape,
     *,
     result_shape: SearchStrategy[Shape] = array_shapes(),
-    dtype: np.dtype = "int"
+    dtype: np.dtype = "int",
 ) -> st.SearchStrategy[Tuple[np.ndarray, ...]]:
     """Return a search strategy for tuples of integer-arrays that, when used
     to index into an array of shape ``shape``, given an array whose shape
