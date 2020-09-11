@@ -79,7 +79,9 @@ class Ordering(Shrinker):
         """
         for i in range(1, len(self.current) - 1):
             if self.current[i - 1] <= self.current[i] <= self.current[i + 1]:
-                continue
+                # This branch is never taken on versions of Python where dicts
+                # preserve their insertion order (pypy or cpython >= 3.7)
+                continue  # pragma: no cover
 
             def can_sort(a, b):
                 if a < 0 or b > len(self.current):

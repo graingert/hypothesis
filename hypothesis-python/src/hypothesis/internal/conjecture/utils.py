@@ -265,7 +265,7 @@ def biased_coin(data, p, *, forced=None):
                 # becomes i > falsey.
                 result = i > falsey
 
-            if i > 1:
+            if i > 1:  # pragma: no branch  # unclear why, but always true on python3.8
                 data.draw_bits(bits, forced=int(result))
         break
     data.stop_example()
